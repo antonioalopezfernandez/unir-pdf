@@ -1,0 +1,232 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #fdecea;
+    /* Fondo rojo claro */
+    color: #331212;
+    /* Texto rojo oscuro */
+    line-height: 1.6;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    /* Hace que la envoltura tenga al menos la altura de la pantalla */
+}
+
+/* Cabecera */
+.cabecera {
+    background: #b22222;
+    /* Rojo oscuro */
+    color: white;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.cabecera h1 {
+    font-size: 1.8rem;
+}
+
+/* Principal */
+.principal {
+    flex-grow: 1;
+    /* Permite que el contenido principal se expanda */
+    margin: 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    /* Centrado vertical y horizontal */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Centra verticalmente */
+    align-items: center;
+    /* Centra horizontalmente */
+}
+
+.principal h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    color: #7f1d1d;
+    /* Rojo oscuro */
+}
+
+.principal p {
+    text-align: justify;
+    margin-bottom: 20px;
+}
+
+/* Texto en negrita (opcional) */
+.combinar {
+    color: #7f1d1d;
+    /* Rojo oscuro para resaltar */
+    font-weight: bold;
+}
+
+.principal a {
+    color: #e63946;
+    /* Rojo brillante */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.principal a:hover {
+    color: #c53030;
+    /* Rojo más oscuro */
+}
+
+/* Estilos para el formulario */
+#formulario-subida {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9ecef;
+    /* Fondo rojo claro */
+    border: 1px solid #d63c3c;
+    /* Borde rojo brillante */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#formulario-subida p {
+    font-size: 1rem;
+    color: #4a1717;
+    /* Rojo oscuro */
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#formulario-subida input[type="file"] {
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #d63c3c;
+    /* Borde rojo brillante */
+    border-radius: 4px;
+    background-color: white;
+    color: #5a1f1f;
+    /* Texto rojo oscuro */
+    transition: border-color 0.3s;
+    width: 100%;
+}
+
+#formulario-subida input[type="file"]:focus {
+    border-color: #b32e2e;
+    /* Rojo más oscuro al enfocarse */
+    outline: none;
+}
+
+#formulario-subida button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: #a4161a;
+    /* Rojo predominante */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    width: 100%;
+    /* Ocupa todo el ancho disponible en móviles */
+    max-width: 150px;
+    /* Ajusta el ancho máximo del botón */
+}
+
+#formulario-subida button:hover {
+    background-color: #7a2525;
+    /* Rojo más oscuro */
+    transform: scale(1.05);
+}
+
+#formulario-subida button:active {
+    background-color: #5a1f1f;
+    /* Rojo muy oscuro */
+    transform: scale(1);
+}
+
+#formulario-subida button:focus {
+    outline: 2px solid #d63c3c;
+    /* Resaltar botón al enfocarse */
+}
+
+
+/* Estilos para el enlace de resultado */
+#resultado {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#resultado a {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: #d63c3c;
+    /* Fondo rojo brillante */
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#resultado a:hover {
+    background-color: #b32e2e;
+    /* Rojo más oscuro */
+    transform: scale(1.05);
+}
+
+#resultado a:active {
+    background-color: #7a2525;
+    /* Rojo muy oscuro */
+    transform: scale(1);
+}
+
+/* Pie de página */
+.pie {
+    background: #b22222;
+    /* Rojo oscuro */
+    color: white;
+    text-align: center;
+    padding: 15px;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pie a {
+    color: #fbd5d5;
+    /* Rojo claro */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.pie a:hover {
+    color: #fab6b6;
+    /* Rojo más claro */
+}
+
+.icon-github {
+    width: 16px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .principal {
+        margin: 10px;
+        padding: 15px;
+    }
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unir PDF</title>
+
+    <!-- No indexar por los motores de búsqueda -->
+    <meta name="robots" content="noindex">
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- JavaScript -->
+    <script src="js/script.js"></script>
+</head>
+
+<body>
+    <!-- Contenedor principal -->
+    <div class="wrapper">
+        <!-- Encabezado -->
+        <header class="cabecera">
+            <h1>Unir PDF</h1>
+        </header>
+
+        <!-- Principal -->
+        <main class="principal">
+            <!-- Formulario -->
+            <form id="formulario-subida">
+                <p>Elige varios ficheros en formato PDF y después pulsa el botón <span class="combinar">Combinar</span>:</p>
+                <input type="file" id="archivo" accept=".pdf" multiple>
+                <button type="button" id="combinar">Combinar</button>
+            </form>
+
+            <!-- Contenedor del enlace de descarga -->
+            <div id="resultado" style="margin-top: 20px;"></div>
+        </main>
+
+        <!-- Pie de página -->
+        <footer class="pie">
+            <p>Bajo licencia <a href="LICENSE.txt">MIT</a> | Desarrollado por
+                <a href="mailto:antonio.angel.lopez.fernandez@gmail.com">Antonio López Fernández</a> |
+                <a href="https://github.com/antonioalopezfernandez/unir-pdf" target="_blank">
+                    <img class="icon-github" src="img/github-mark-white.svg" alt="GitHub Icon">
+                </a>
+            </p>
+        </footer>
+    </div>
+</body>
+
+</html>
