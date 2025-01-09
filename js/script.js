@@ -34,7 +34,7 @@ document.getElementById('combinar').addEventListener('click', async () => {
 
         // Generar un enlace para descargar el PDF combinado
         const resultado = document.getElementById('resultado');
-        resultado.innerHTML = `<a href="${url}" download="combinado.pdf">Descargar PDF Combinado</a>`;
+        resultado.innerHTML = `<a href="${url}" download="combinado.pdf">Descargar PDF combinado</a>`;
 
         // Opcional: Desactivar el enlace después de cierta cantidad de tiempo
         setTimeout(() => {
