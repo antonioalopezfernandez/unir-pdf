@@ -14,7 +14,8 @@
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
 
     <!-- JavaScript -->
-    <script src="js/script.js"></script>
+    <script src="js/script.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js" defer></script>
 </head>
 
 <body>
@@ -29,8 +30,9 @@
         <main class="principal">
             <!-- Formulario -->
             <form id="formulario-subida">
-                <p>Elige varios ficheros en formato PDF y después pulsa el botón <span class="combinar">Combinar</span>:</p>
-                <input type="file" id="archivo" accept=".pdf" multiple>
+                <p>Elige varios ficheros en formato PDF y después pulsa el botón <span class="combinar">Combinar</span>:
+                </p>
+                <input type="file" id="archivos" accept=".pdf" multiple>
                 <button type="button" id="combinar">Combinar</button>
             </form>
 
