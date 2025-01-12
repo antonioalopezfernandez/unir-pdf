@@ -166,8 +166,8 @@ a:hover {
 }
 
 .icon-github {
-    width: 15px; /* Ajusta el tamaño del icono */
-    height: 15px; /* Asegura que la altura sea proporcional */
+    width: 15px;
+    height: 15px;
     vertical-align: middle;
     margin-right: 5px;
 }
@@ -202,8 +202,7 @@ a:hover {
     margin: 20px 0;
     padding: 0;
     list-style: none;
-    max-width: 500px;
-    width: 100%;
+    max-width: 100%;
     color: var(--texto-rojo);
     font-size: 1rem;
 }
@@ -217,8 +216,17 @@ a:hover {
     border-radius: 4px;
     background-color: var(--rojo-claro);
     margin-bottom: 5px;
-    word-wrap: break-word;
-    text-align: left;
+    word-wrap: break-word; /* Permitir el ajuste de texto */
+    max-width: 100%; /* Adaptarse al contenedor */
+}
+
+/* Nombre del archivo */
+#lista-archivos li span {
+    white-space: nowrap; /* Evitar que el texto baje de línea */
+    overflow: hidden; /* Ocultar texto que exceda el ancho */
+    text-overflow: ellipsis; /* Mostrar puntos suspensivos */
+    max-width: 70%; /* Limitar el ancho */
+    display: inline-block; /* Requerido para usar max-width */
 }
 
 /* Botones en la lista de archivos */
@@ -228,8 +236,8 @@ a:hover {
 }
 
 .lista-archivos-botones button {
-    background-color: var(--rojo-brillante); /* Fondo rojo brillante */
-    color: white; /* Texto blanco */
+    background-color: var(--rojo-brillante);
+    color: white;
     border: none;
     padding: 5px 8px;
     border-radius: 4px;
@@ -239,13 +247,13 @@ a:hover {
 }
 
 .lista-archivos-botones button:hover {
-    background-color: var(--rojo-mas-oscuro); /* Fondo más oscuro al pasar el ratón */
-    transform: scale(1.05); /* Ligera ampliación */
+    background-color: var(--rojo-mas-oscuro);
+    transform: scale(1.05);
 }
 
 .lista-archivos-botones button:active {
-    background-color: var(--rojo-muy-oscuro); /* Fondo muy oscuro al hacer clic */
-    transform: scale(1); /* Reducir ampliación */
+    background-color: var(--rojo-muy-oscuro);
+    transform: scale(1);
 }
 
 /* -----------------------------

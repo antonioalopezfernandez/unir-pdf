@@ -18,7 +18,10 @@ const actualizarListaArchivos = () => {
 
     archivosSeleccionados.forEach((archivo, index) => {
         const li = document.createElement('li'); // Crear un elemento <li>
-        li.textContent = archivo.name; // Asignar el nombre del archivo
+
+        // Crear contenedor para el nombre del archivo
+        const span = document.createElement('span');
+        span.textContent = archivo.name; // Asignar el nombre del archivo
 
         // Contenedor de botones
         const contenedorBotones = document.createElement('div');
@@ -49,6 +52,7 @@ const actualizarListaArchivos = () => {
         btnEliminar.onclick = () => eliminarArchivo(index);
         contenedorBotones.appendChild(btnEliminar);
 
+        li.appendChild(span); // Añadir el nombre al elemento
         li.appendChild(contenedorBotones); // Añadir botones al elemento
         listaArchivos.appendChild(li); // Añadir elemento a la lista
     });
