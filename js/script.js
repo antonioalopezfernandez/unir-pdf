@@ -7,16 +7,69 @@ const listaArchivos = document.getElementById('lista-archivos'); // Lista para m
 const botonCombinar = document.getElementById('combinar'); // Botón para combinar archivos
 const resultado = document.getElementById('resultado'); // Contenedor del enlace de descarga
 
+// Archivos seleccionados (cola)
+let archivosSeleccionados = [];
+
 // -----------------------------
 // Función: Actualizar la lista de archivos visibles
 // -----------------------------
-const actualizarListaArchivos = (archivos) => {
+const actualizarListaArchivos = () => {
     listaArchivos.innerHTML = ''; // Limpiar la lista existente
-    Array.from(archivos).forEach((archivo) => {
+
+    archivosSeleccionados.forEach((archivo, index) => {
         const li = document.createElement('li'); // Crear un elemento <li>
         li.textContent = archivo.name; // Asignar el nombre del archivo
-        listaArchivos.appendChild(li); // Añadir el <li> al contenedor
+
+        // Contenedor de botones
+        const contenedorBotones = document.createElement('div');
+        contenedorBotones.classList.add('lista-archivos-botones');
+
+        // Botón para mover hacia arriba
+        if (index > 0) {
+            const btnArriba = document.createElement('button');
+            btnArriba.textContent = '⬆️';
+            btnArriba.title = 'Mover arriba';
+            btnArriba.onclick = () => moverArchivo(index, index - 1);
+            contenedorBotones.appendChild(btnArriba);
+        }
+
+        // Botón para mover hacia abajo
+        if (index < archivosSeleccionados.length - 1) {
+            const btnAbajo = document.createElement('button');
+            btnAbajo.textContent = '⬇️';
+            btnAbajo.title = 'Mover abajo';
+            btnAbajo.onclick = () => moverArchivo(index, index + 1);
+            contenedorBotones.appendChild(btnAbajo);
+        }
+
+        // Botón para eliminar
+        const btnEliminar = document.createElement('button');
+        btnEliminar.textContent = '🗑️';
+        btnEliminar.title = 'Eliminar';
+        btnEliminar.onclick = () => eliminarArchivo(index);
+        contenedorBotones.appendChild(btnEliminar);
+
+        li.appendChild(contenedorBotones); // Añadir botones al elemento
+        listaArchivos.appendChild(li); // Añadir elemento a la lista
     });
+};
+
+// -----------------------------
+// Función: Mover un archivo en la cola
+// -----------------------------
+const moverArchivo = (indiceActual, nuevoIndice) => {
+    const archivo = archivosSeleccionados[indiceActual];
+    archivosSeleccionados.splice(indiceActual, 1); // Quitar archivo del índice actual
+    archivosSeleccionados.splice(nuevoIndice, 0, archivo); // Insertar archivo en el nuevo índice
+    actualizarListaArchivos(); // Actualizar lista visual
+};
+
+// -----------------------------
+// Función: Eliminar un archivo de la cola
+// -----------------------------
+const eliminarArchivo = (indice) => {
+    archivosSeleccionados.splice(indice, 1); // Eliminar archivo del array
+    actualizarListaArchivos(); // Actualizar lista visual
 };
 
 // -----------------------------
@@ -48,37 +101,29 @@ zonaArrastre.addEventListener('drop', (event) => {
     event.preventDefault(); // Prevenir comportamiento predeterminado
     zonaArrastre.classList.remove('dragover'); // Quitar estilo de arrastre
 
-    const archivos = event.dataTransfer.files; // Obtener archivos soltados
-    const archivosValidos = Array.from(archivos).filter(archivo => archivo.type === 'application/pdf'); // Filtrar PDFs
-
-    if (archivosValidos.length === 0) {
-        alert('Por favor, arrastra únicamente archivos PDF.');
-        return;
-    }
-
-    inputArchivos.files = archivos; // Asignar archivos al input
-    actualizarListaArchivos(archivosValidos); // Actualizar lista visible
-    alert(`${archivosValidos.length} archivo(s) PDF añadido(s).`);
+    const archivos = Array.from(event.dataTransfer.files).filter((archivo) => archivo.type === 'application/pdf');
+    archivosSeleccionados = archivosSeleccionados.concat(archivos); // Añadir nuevos archivos a la cola
+    actualizarListaArchivos(); // Actualizar lista visual
 });
 
 // -----------------------------
 // Evento: Actualizar lista al seleccionar archivos manualmente
 // -----------------------------
 inputArchivos.addEventListener('change', () => {
-    const archivos = inputArchivos.files; // Obtener archivos seleccionados
-    actualizarListaArchivos(archivos); // Actualizar lista visible
+    const archivos = Array.from(inputArchivos.files);
+    archivosSeleccionados = archivosSeleccionados.concat(archivos); // Añadir nuevos archivos
+    actualizarListaArchivos(); // Actualizar lista visual
 });
 
 // -----------------------------
 // Función: Combinar PDFs
 // -----------------------------
-const combinarPDFs = async (archivos) => {
+const combinarPDFs = async () => {
     try {
         const { PDFDocument } = window.PDFLib; // Cargar PDF-lib
         const pdfDoc = await PDFDocument.create(); // Crear documento vacío
 
-        // Iterar sobre los archivos y añadir sus páginas al nuevo PDF
-        for (let archivo of archivos) {
+        for (const archivo of archivosSeleccionados) {
             const arrayBuffer = await archivo.arrayBuffer(); // Leer archivo como ArrayBuffer
             const pdf = await PDFDocument.load(arrayBuffer); // Cargar PDF
             const paginas = await pdfDoc.copyPages(pdf, pdf.getPageIndices()); // Copiar páginas
@@ -96,15 +141,13 @@ const combinarPDFs = async (archivos) => {
 // Evento: Combinar archivos al hacer clic en el botón
 // -----------------------------
 botonCombinar.addEventListener('click', async () => {
-    const archivos = inputArchivos.files; // Obtener archivos seleccionados
-
-    if (archivos.length < 2) {
+    if (archivosSeleccionados.length < 2) {
         alert('Por favor, selecciona al menos dos archivos PDF.');
         return;
     }
 
     try {
-        const pdfBytes = await combinarPDFs(archivos); // Llamar a la función de combinar PDFs
+        const pdfBytes = await combinarPDFs(); // Llamar a la función de combinar PDFs
 
         // Crear blob para descarga
         const blob = new Blob([pdfBytes], { type: 'application/pdf' });

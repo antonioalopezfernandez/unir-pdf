@@ -209,6 +209,9 @@ a:hover {
 }
 
 #lista-archivos li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 10px;
     border: 1px solid var(--rojo-brillante);
     border-radius: 4px;
@@ -216,6 +219,33 @@ a:hover {
     margin-bottom: 5px;
     word-wrap: break-word;
     text-align: left;
+}
+
+/* Botones en la lista de archivos */
+.lista-archivos-botones {
+    display: flex;
+    gap: 5px;
+}
+
+.lista-archivos-botones button {
+    background-color: var(--rojo-brillante); /* Fondo rojo brillante */
+    color: white; /* Texto blanco */
+    border: none;
+    padding: 5px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.lista-archivos-botones button:hover {
+    background-color: var(--rojo-mas-oscuro); /* Fondo más oscuro al pasar el ratón */
+    transform: scale(1.05); /* Ligera ampliación */
+}
+
+.lista-archivos-botones button:active {
+    background-color: var(--rojo-muy-oscuro); /* Fondo muy oscuro al hacer clic */
+    transform: scale(1); /* Reducir ampliación */
 }
 
 /* -----------------------------
