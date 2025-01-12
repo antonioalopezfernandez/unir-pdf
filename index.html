@@ -21,20 +21,24 @@
 <body>
     <!-- Contenedor principal -->
     <div class="wrapper">
-        <!-- Encabezado -->
+        <!-- Cabecera -->
         <header class="cabecera">
             <h1>Unir PDF</h1>
         </header>
 
-        <!-- Principal -->
+        <!-- Contenido principal -->
         <main class="principal">
-            <!-- Formulario -->
-            <form id="formulario-subida">
-                <p>Elige varios ficheros en formato PDF y después pulsa el botón <span class="combinar">Combinar</span>:
-                </p>
-                <input type="file" id="archivos" accept=".pdf" multiple>
-                <button type="button" id="combinar">Combinar</button>
-            </form>
+            <!-- Área de arrastrar y soltar archivos -->
+            <div id="zona-arrastre">
+                <p>Arrastra y suelta tus archivos PDF aquí o haz clic para seleccionarlos:</p>
+                <input type="file" id="archivos" accept=".pdf" multiple style="display: none;">
+            </div>
+
+            <!-- Lista de archivos añadidos -->
+            <ul id="lista-archivos"></ul>
+
+            <!-- Botón para combinar los archivos PDF -->
+            <button type="button" id="combinar">Combinar</button>
 
             <!-- Contenedor del enlace de descarga -->
             <div id="resultado" style="margin-top: 20px;"></div>
