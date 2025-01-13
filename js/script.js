@@ -164,10 +164,19 @@ botonCombinar.addEventListener('click', async () => {
         const url = URL.createObjectURL(blob); // Crear URL temporal
 
         // Mostrar enlace de descarga
-        resultado.innerHTML = `<a href="${url}" download="combinado.pdf">Descargar PDF combinado</a>`;
+        const enlaceDescarga = document.createElement('a');
+        enlaceDescarga.href = url;
+        enlaceDescarga.download = "combinado.pdf";
+        enlaceDescarga.textContent = "Descargar PDF combinado";
+        enlaceDescarga.style.display = "inline-block";
+        enlaceDescarga.style.marginTop = "20px";
+        resultado.appendChild(enlaceDescarga);
 
-        // Revocar URL después de 1 minuto
-        setTimeout(() => URL.revokeObjectURL(url), 60000);
+        // Revocar URL y ocultar botón después de 1 minuto
+        setTimeout(() => {
+            URL.revokeObjectURL(url);
+            resultado.removeChild(enlaceDescarga);
+        }, 60000);
     } catch (error) {
         alert(error.message); // Mostrar mensaje de error al usuario
     }
