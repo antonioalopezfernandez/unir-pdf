@@ -128,10 +128,16 @@ const combinarPDFs = async () => {
         const pdfDoc = await PDFDocument.create(); // Crear documento vacío
 
         for (const archivo of archivosSeleccionados) {
-            const arrayBuffer = await archivo.arrayBuffer(); // Leer archivo como ArrayBuffer
-            const pdf = await PDFDocument.load(arrayBuffer); // Cargar PDF
-            const paginas = await pdfDoc.copyPages(pdf, pdf.getPageIndices()); // Copiar páginas
-            paginas.forEach((pagina) => pdfDoc.addPage(pagina)); // Añadir páginas al nuevo PDF
+            try {
+                const arrayBuffer = await archivo.arrayBuffer(); // Leer archivo como ArrayBuffer
+                const pdf = await PDFDocument.load(arrayBuffer); // Cargar PDF normalmente
+                const paginas = await pdfDoc.copyPages(pdf, pdf.getPageIndices()); // Copiar páginas
+                paginas.forEach((pagina) => pdfDoc.addPage(pagina)); // Añadir páginas al nuevo PDF
+            } catch (error) {
+                console.warn(`No se pudo procesar el archivo ${archivo.name}:`, error);
+                alert(`El archivo "${archivo.name}" está firmado o protegido. Será ignorado.`);
+                continue; // Pasar al siguiente archivo
+            }
         }
 
         return await pdfDoc.save(); // Retornar el PDF combinado como bytes
